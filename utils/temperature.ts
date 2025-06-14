@@ -17,4 +17,14 @@ function getOppositeUnit(unit: string) {
   return unit === UNITS.calcius ? UNITS.farahneit : UNITS.calcius;
 }
 
-export { convertTemperatureTwo, getOppositeUnit, UNITS };
+function isIceTemperature(temperature: number, unit: string) {
+  if (unit === UNITS.calcius) {
+    return temperature <= 0;
+  } else if (unit === UNITS.farahneit) {
+    return temperature <= 32;
+  } else {
+    throw new Error("Invalid unit");
+  }
+}
+
+export { convertTemperatureTwo, getOppositeUnit, isIceTemperature, UNITS };

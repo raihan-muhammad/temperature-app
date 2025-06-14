@@ -1,8 +1,12 @@
 import Button from "@/components/button/button";
 import DisplayTemperature from "@/components/display-temperature/display-temperature";
 import Input from "@/components/input/input";
-import { convertTemperatureTwo, getOppositeUnit } from "@/utils/temperature";
-import { useState } from "react";
+import {
+  convertTemperatureTwo,
+  getOppositeUnit,
+  isIceTemperature,
+} from "@/utils/temperature";
+import { useEffect, useState } from "react";
 import { ImageBackground, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import s from "./app.style";
@@ -11,10 +15,17 @@ const ColdBg = require("@/assets/images/cold.png");
 export default function Index() {
   const [inputValue, setInputValue] = useState(0);
   const [currentUnit, setCurrentUnit] = useState("°C");
+  const [currentBg, setCurrentBg] = useState(ColdBg);
   const oppositeUnit = getOppositeUnit(currentUnit);
 
+  useEffect(() => {
+    const isCold = isIceTemperature(inputValue, currentUnit);
+
+    setCurrentBg(isCold ? ColdBg : HotBg);
+  }, [inputValue, currentUnit]);
+
   return (
-    <ImageBackground style={s.backgroundImage} source={HotBg}>
+    <ImageBackground style={s.backgroundImage} source={currentBg}>
       <SafeAreaProvider>
         <SafeAreaView style={s.root}>
           <View style={s.workspace}>
