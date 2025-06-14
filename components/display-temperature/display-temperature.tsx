@@ -2,7 +2,7 @@ import { Text } from "react-native";
 import { s } from "./display-temperature.styled";
 
 interface DisplayTemperatureProps {
-  temperature: number;
+  temperature: string;
   unit: string;
 }
 const DisplayTemperature = ({ temperature, unit }: DisplayTemperatureProps) => {

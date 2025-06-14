@@ -13,7 +13,7 @@ const Input = ({ defaultValue, onChange, unit }: InputProps) => {
     <View style={s.root}>
       <TextInput
         style={s.input}
-        maxLength={3}
+        maxLength={4}
         keyboardType="numeric"
         placeholder="Type your temperature!"
         defaultValue={defaultValue}
